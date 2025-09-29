@@ -1,0 +1,34 @@
+# === Frontend (Next.js) ===
+front-end/node_modules/
+front-end/.next/
+front-end/out/
+front-end/coverage/
+
+# === Backend (FastAPI / Python) ===
+back-end/.env
+back-end/.env.*
+back-end/__pycache__/
+back-end/.venv/
+back-end/.pytest_cache/
+back-end/.mypy_cache/
+back-end/*.pyc
+back-end/*.pyo
+back-end/*.pyd
+
+# === Logs ===
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# === Misc ===
+.DS_Store
+*.pem
+
+# === Deployment ===
+.vercel
+
+# === TypeScript (frontend only) ===
+front-end/*.tsbuildinfo
+front-end/next-env.d.ts
