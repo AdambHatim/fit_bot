@@ -10,23 +10,48 @@ const Rag: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-  const handleSend = () => {
-    if (!text.trim()) return;
+  const handleSend = async () => {
+  if (!text.trim()) return;
 
-    const userMessage = text.trim();
-    setText("");
+  const userMessage = text.trim();
+  setText("");
 
-    const newMessages = [
-      ...messages,
-      { userRequest: userMessage, botResponse: "..." },
-    ];
-    setMessages(newMessages);
-    setLoading(true);
+  // Add the user's message immediately, with bot "..." placeholder
+  const newMessages = [
+    ...messages,
+    { userRequest: userMessage, botResponse: "..." },
+  ];
+  setMessages(newMessages);
+  setLoading(true);
 
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  };
+  try {
+    const res = await fetch("http://127.0.0.1:8000/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query: userMessage }),
+    });
+
+    const data = await res.json();
+
+    // Replace "..." with backend response
+    setMessages((prev) =>
+      prev.map((m, i) =>
+        i === prev.length - 1 ? { ...m, botResponse: data.response } : m
+      )
+    );
+  } catch (err) {
+    console.error("Error contacting backend:", err);
+    setMessages((prev) =>
+      prev.map((m, i) =>
+        i === prev.length - 1
+          ? { ...m, botResponse: "❌ Error connecting to backend." }
+          : m
+      )
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   // Auto-scroll to bottom on new message
   useEffect(() => {
