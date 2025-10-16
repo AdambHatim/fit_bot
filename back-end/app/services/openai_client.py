@@ -1,14 +1,13 @@
 from openai import OpenAI
-from app.core.config import OPENAI_KEY
+import os
+os.chdir("/Users/adamh/Desktop/fit_bot/back-end/app")
 
-client = OpenAI(api_key=OPENAI_KEY)
-
-def get_embedding(texts: str) -> list[float]:
+def get_embedding(openai_client, texts: str) -> list[float]:
     """
     Converts a text string into an embedding (vector of floats)
     using OpenAI's text-embedding-3-small model.
     """
-    response = client.embeddings.create(
+    response = openai_client.embeddings.create(
         model="text-embedding-3-small",
         input=texts
     )
