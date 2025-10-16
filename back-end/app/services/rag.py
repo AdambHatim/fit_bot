@@ -2,7 +2,7 @@ import os
 import json
 from dotenv import load_dotenv
 from app.services.openai_client import get_embedding  # your embedding function
-
+from app.services.openai_client import get_response
 # Load environment variables
 load_dotenv()
 
@@ -67,9 +67,11 @@ def query_qdrant_and_get_text(text, collection="database", limit=1):
 
 def query_qdrant_and_get_text(openai_client, qdrant_client ,text, collection="database", limit=1):
     embedding = get_embedding(openai_client, text)
-    data = qdrant_client.search(collection_name="database", query_vector=embedding, limit=1)
-    text = data[0].payload['text']
-    return text
+    data = qdrant_client.search(collection_name= collection, query_vector=embedding, limit=limit)
+    rag_text = data[0].payload['text']
+    response = get_response(openai_client, text, rag_text)
+
+    return response
 
 
 

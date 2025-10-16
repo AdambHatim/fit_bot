@@ -11,4 +11,4 @@ async def chat(request: Request):
     user_message = data.get("query", "")
     text = query_qdrant_and_get_text(openai_client, qdrant_client, user_message)
 
-    return {"response": f"You said: {text}"}
+    return {"response": {text}}
