@@ -1,6 +1,9 @@
 from openai import OpenAI
 import os
-os.chdir("/Users/adamh/Desktop/fit_bot/back-end/app")
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
 
 def get_embedding(openai_client, texts: str) -> list[float]:
     """
