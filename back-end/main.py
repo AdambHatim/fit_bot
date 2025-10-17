@@ -9,7 +9,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",               # local dev
-        "https://fitbot-chat.netlify.app"      # your deployed frontend
+        "https://ragbotfit.netlify.app"      # your deployed frontend
     ],
     allow_credentials=True,
     allow_methods=["*"],
