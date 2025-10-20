@@ -29,7 +29,7 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({ messages }) => {
           <div className="flex justify-start">
             <div className="max-w-[75%] rounded-2xl bg-gray-100 text-gray-900 p-3 text-sm shadow-sm break-words prose prose-sm max-w-none">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                {msg.botResponse}
+                {String(msg.botResponse)}
               </ReactMarkdown>
             </div>
           </div>

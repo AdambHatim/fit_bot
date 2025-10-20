@@ -8,8 +8,9 @@ app = FastAPI(title="Fitness RAG API")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000",               # local dev
-        "https://ragbotfit.netlify.app"      # your deployed frontend
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "https://ragbotfit.netlify.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],
